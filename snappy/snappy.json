@@ -31,10 +31,6 @@
         {
             "type": "file",
             "path": "snappy.pc.in"
-        },
-        {
-            "type": "patch",
-            "path": "../patches/snappy-rtti.patch"
         }
     ]
 }

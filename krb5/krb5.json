@@ -24,7 +24,7 @@
         },
         {
             "type": "patch",
-            "path": "krb5-c23-strchr.patch"
+            "path": "../patches/krb5-c23-strchr.patch"
         },
         {
             "type": "file",
