@@ -15,9 +15,9 @@
             "buildsystem": "cmake-ninja",
             "builddir": true,
             "build-options": {
-                "append-path": "/usr/lib/sdk/node20/bin",
+                "append-path": "/usr/lib/sdk/node26/bin",
                 "env": [
-                    "npm_config_nodedir=/usr/lib/sdk/node20"
+                    "npm_config_nodedir=/usr/lib/sdk/node26"
                 ]
             },
             "config-opts": [
@@ -66,10 +66,6 @@
                 {
                     "type": "patch",
                     "path": "patches/flatpak-includedir-dbus.patch"
-                },
-                {
-                    "type": "patch",
-                    "path": "patches/qtwebengine-Disbale-xnnpack-on-aarch64.patch"
                 },
                 {
                     "type": "patch",
