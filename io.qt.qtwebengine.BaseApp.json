@@ -17,7 +17,8 @@
             "build-options": {
                 "append-path": "/usr/lib/sdk/node26/bin",
                 "env": [
-                    "npm_config_nodedir=/usr/lib/sdk/node26"
+                    "npm_config_nodedir=/usr/lib/sdk/node26",
+                    "NINJAFLAGS=-j2"
                 ]
             },
             "config-opts": [
@@ -62,6 +63,10 @@
                 {
                     "type": "patch",
                     "path": "patches/qtwebengine-flatpak-paths.patch"
+                },
+                {
+                    "type": "patch",
+                    "path": "patches/qtwebengine-glib-message-pump.patch"
                 },
                 {
                     "type": "patch",

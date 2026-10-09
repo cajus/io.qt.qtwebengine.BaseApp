@@ -1,0 +1,35 @@
+Subject: PipeWire camera portal needs use_glib=true
+
+Chromium uses the glib message loop when talking to the xdg camera portal. If
+we don't enable use_glib, this path is dead. This forces all applications
+using QtWebEngine to specify "--device=all" in order to do the V4L fallback.
+
+The process is launched with "--message-loop-type-ui", so use_glib=true gets
+a glib message loop. Qt code itself is not prepared for a Qt style message
+pump in this area, so the impact of implmeneting it is much higher.
+
+Side effects are linking to glib and indirectly defining USE_LIBSECRET in
+os_crypt/sync. libsecret is dlopened and Qt disables encrypted cookies on
+linux.
+
+Applications still need to pass "--enable-features=WebRtcPipeWireCamera" to
+make camera access work with PipeWire, though.
+
+diff --git a/src/core/CMakeLists.txt b/src/core/CMakeLists.txt
+--- a/src/core/CMakeLists.txt
++++ b/src/core/CMakeLists.txt
+@@ -455,13 +455,13 @@ foreach(arch ${archs})
+         if(LINUX)
+             list(APPEND gnArgArg
+                 use_gtk=false # GTK toolkit bindings
+                 use_qt5=false # Qt5 toolkit bindings
+                 use_gio=false
+                 use_bundled_fontconfig=false
+-                use_glib=false
++                use_glib=true
+                 use_bluez=false
+                 is_cfi=false
+                 use_ozone=true
+                 ozone_auto_platforms=false
+                 ozone_platform_headless=false
+                 ozone_platform_external=true
